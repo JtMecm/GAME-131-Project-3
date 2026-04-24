@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -58,7 +57,7 @@ public class CharacterWindow : EditorWindow
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Class ");
         EditorGUILayout.Space();
-        characterClass = (Class) EditorGUILayout.EnumPopup(characterClass, GUILayout.Width(300));
+        characterClass = (Class)EditorGUILayout.EnumPopup(characterClass, GUILayout.Width(300));
         EditorGUILayout.Space();
         GUILayout.Label("Level ");
         EditorGUILayout.Space();
@@ -72,7 +71,7 @@ public class CharacterWindow : EditorWindow
         EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label("Right Hand ");
-        rightHand = (Item) EditorGUILayout.ObjectField(rightHand, typeof(Item), true);
+        rightHand = (Item)EditorGUILayout.ObjectField(rightHand, typeof(Item), true);
         EditorGUILayout.Space(10);
         GUILayout.Label("Left Hand ");
         if (characterClass == Class.Survivor)
@@ -81,7 +80,7 @@ public class CharacterWindow : EditorWindow
         }
         else
         {
-            leftHand = (Item) EditorGUILayout.ObjectField(leftHand, typeof(Item), true);
+            leftHand = (Item)EditorGUILayout.ObjectField(leftHand, typeof(Item), true);
         }
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
@@ -90,7 +89,7 @@ public class CharacterWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Body ");
-        body = (Item) EditorGUILayout.ObjectField(body, typeof(Item), true);
+        body = (Item)EditorGUILayout.ObjectField(body, typeof(Item), true);
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
 
@@ -99,13 +98,23 @@ public class CharacterWindow : EditorWindow
         // Creating and adding new character
         memberToAdd.name = nameText;
         memberToAdd.characterClass = characterClass.ToString();
+        memberToAdd.level = characterLevel;
         memberToAdd.rightHand = rightHand;
         memberToAdd.leftHand = leftHand;
         memberToAdd.body = body;
 
         if (GUILayout.Button("Add Party Member") && party.Count < 4)
         {
-            // Character.AddToParty(memberToAdd);
+            if (party.Contains(memberToAdd))
+            {
+                Debug.LogError("They are already in your party!");
+            }
+            else
+            {
+                party.Add(new PartyMember());
+                party[partyIndex].name = nameText;
+                partyIndex++;
+            }
         }
 
         if (party.Count >= 4)
@@ -115,11 +124,12 @@ public class CharacterWindow : EditorWindow
 
         if (GUILayout.Button("Clear Party"))
         {
-            // Character.ClearParty();
+            party.Clear();
             memberToAdd = new PartyMember();
+            partyIndex = 0;
         }
 
-        
+
         switch (characterClass)
         {
             case Class.Survivor:

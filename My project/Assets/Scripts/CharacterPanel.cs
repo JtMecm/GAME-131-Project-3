@@ -1,16 +1,27 @@
+using TMPro;
 using UnityEngine;
 
 public class CharacterPanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI classText;
+    [SerializeField] private int level;
+    [SerializeField] private TextMeshProUGUI rightHandText;
+    [SerializeField] private TextMeshProUGUI leftHandText;
+
+    private void Awake()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InstantiatePanel(PartyMember memberToAdd)
     {
         
+    }
+
+    public CharacterPanel(string name, string classs, int lvl)
+    {
+        nameText.text = name;
+        classText.text = classs + lvl.ToString();
     }
 }

@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 8828086739468145704}
   - component: {fileID: 8658426372135507945}
   - component: {fileID: 2789503426430774012}
+  - component: {fileID: 4864208993509341291}
   m_Layer: 5
   m_Name: CharPanel
   m_TagString: Untagged
@@ -732,6 +733,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4864208993509341291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343042158467351478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d461878255dbd8044952e0b5c99f4ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterPanel
+  nameText: {fileID: 2745921001686237467}
+  classText: {fileID: 6760779521589518047}
+  level: 0
+  rightHandText: {fileID: 3801365481208393024}
+  leftHandText: {fileID: 6613038285909500331}
 --- !u!1 &8615020903235217435
 GameObject:
   m_ObjectHideFlags: 0

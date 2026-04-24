@@ -29,6 +29,7 @@ public class PartyMember
 {
     public string name;
     public string characterClass;
+    public int level;
     public Item rightHand;
     public Item leftHand;
     public Item body;
