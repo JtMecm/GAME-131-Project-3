@@ -1,15 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
 public class Character : MonoBehaviour
 {
-    public string characterName;
-    public string characterClass;
+    private List<PartyMember> party;
+
+    public List<PartyMember> GetParty { get { return party; } }
 
     public void AddToParty(PartyMember newMember)
     {
+        if (party.Contains(newMember))
+        {
+            Debug.LogError("They are already in your party!");
+            return;
+        }
 
+        party.Add(newMember);
+    }
+
+    public void ClearParty()
+    {
+        party.Clear();
     }
 }
 

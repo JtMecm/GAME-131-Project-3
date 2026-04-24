@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class CharacterWindow : EditorWindow
     private GUIContent content = new GUIContent();
 
     private List<PartyMember> party;
+    private PartyMember memberToAdd;
     private int partyIndex;
     private string nameText;
     private Class characterClass;
@@ -15,8 +17,6 @@ public class CharacterWindow : EditorWindow
     private Item rightHand;
     private Item leftHand;
     private Item body;
-
-    public List<PartyMember> GetParty { get { return party; } }
 
     private void OnEnable()
     {
@@ -96,20 +96,16 @@ public class CharacterWindow : EditorWindow
 
         EditorGUILayout.Space(20);
 
+        // Creating and adding new character
+        memberToAdd.name = nameText;
+        memberToAdd.characterClass = characterClass.ToString();
+        memberToAdd.rightHand = rightHand;
+        memberToAdd.leftHand = leftHand;
+        memberToAdd.body = body;
+
         if (GUILayout.Button("Add Party Member") && party.Count < 4)
         {
-            foreach(PartyMember member in party)
-            {
-                if (member.name == nameText)
-                {
-                    Debug.LogError("They are already in your party!");
-                    break;
-                }
-            }
-
-            party.Add(new PartyMember());
-            party[partyIndex].name = nameText;
-            partyIndex++;
+            // Character.AddToParty(memberToAdd);
         }
 
         if (party.Count >= 4)
@@ -119,10 +115,11 @@ public class CharacterWindow : EditorWindow
 
         if (GUILayout.Button("Clear Party"))
         {
-            party = new List<PartyMember>();
-            partyIndex = 0;
+            // Character.ClearParty();
+            memberToAdd = new PartyMember();
         }
 
+        
         switch (characterClass)
         {
             case Class.Survivor:
@@ -136,14 +133,6 @@ public class CharacterWindow : EditorWindow
                 break;
             default:
                 break;
-        }
-    }
-
-    public void PopulateParty()
-    {
-        for (int i = 0; i < party.Count; i++)
-        {
-
         }
     }
 

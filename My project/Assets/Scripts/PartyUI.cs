@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PartyUI : MonoBehaviour
 {
-    private List<PartyMember> party;
+    
 
     private void Awake()
     {
