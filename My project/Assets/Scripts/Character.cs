@@ -1,27 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Character", menuName = "Character")]
-public class Character : ScriptableObject
+// [CreateAssetMenu(fileName = "New Character", menuName = "Character")]
+public class Character : MonoBehaviour
 {
-    [Header("Details")]
     public string characterName;
     public string characterClass;
 
-    [Header("Attributes")]
-    public int uses;
-    public float effectiveness;
-    public float failure;
-
-    [Header("Inventory")]
-    public List<string> items;
-
-    [Header("Skills")]
-    public List<string> skills;
-
-
-    private void Awake()
+    public void AddToParty(PartyMember newMember)
     {
-        
+
     }
+}
+
+[System.Serializable]
+public class PartyMember
+{
+    public string name;
+    public string characterClass;
+    public Item rightHand;
+    public Item leftHand;
+    public Item body;
 }

@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class CharacterWindow : EditorWindow
 {
-    private bool showInventory = true;
-    private bool showAbility = true;
-
     private GUIStyle heading = new GUIStyle();
     private GUIContent content = new GUIContent();
-    private Rect rect = new Rect(0, 0, 0, 0);
-    private Rect area = new Rect(10, 10, 100, 100);
 
+    private List<PartyMember> party;
+    private int partyIndex;
     private string nameText;
     private Class characterClass;
+    private int characterLevel;
+    private Item rightHand;
+    private Item leftHand;
+    private Item body;
 
-    private float bleat = 0f;
-    private float baa = 100f;
-    private string yip;
+    public List<PartyMember> GetParty { get { return party; } }
 
     private void OnEnable()
     {
@@ -27,9 +26,11 @@ public class CharacterWindow : EditorWindow
         content.text = "Items";
         content.tooltip = "Items";
 
-        characterClass = new Class();
+        partyIndex = 0;
 
-        yip = "Yip!";
+        nameText = "";
+        characterClass = new Class();
+        characterLevel = 1;
     }
 
     [MenuItem("Window/Character Window")]
@@ -51,13 +52,76 @@ public class CharacterWindow : EditorWindow
         nameText = GUILayout.TextField(nameText, 20, GUILayout.Width(100));
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
-        
+
+        EditorGUILayout.Space(5);
+
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label("Class");
+        GUILayout.Label("Class ");
         EditorGUILayout.Space();
         characterClass = (Class) EditorGUILayout.EnumPopup(characterClass, GUILayout.Width(300));
         EditorGUILayout.Space();
+        GUILayout.Label("Level ");
+        EditorGUILayout.Space();
+        characterLevel = EditorGUILayout.IntField(characterLevel);
+        GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(20);
+        GUILayout.Label("Inventory");
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Right Hand ");
+        rightHand = (Item) EditorGUILayout.ObjectField(rightHand, typeof(Item), true);
+        EditorGUILayout.Space(10);
+        GUILayout.Label("Left Hand ");
+        if (characterClass == Class.Survivor)
+        {
+            EditorGUILayout.HelpBox("Gnawed Off", MessageType.Warning, true);
+        }
+        else
+        {
+            leftHand = (Item) EditorGUILayout.ObjectField(leftHand, typeof(Item), true);
+        }
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Body ");
+        body = (Item) EditorGUILayout.ObjectField(body, typeof(Item), true);
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(20);
+
+        if (GUILayout.Button("Add Party Member") && party.Count < 4)
+        {
+            foreach(PartyMember member in party)
+            {
+                if (member.name == nameText)
+                {
+                    Debug.LogError("They are already in your party!");
+                    break;
+                }
+            }
+
+            party.Add(new PartyMember());
+            party[partyIndex].name = nameText;
+            partyIndex++;
+        }
+
+        if (party.Count >= 4)
+        {
+            EditorGUILayout.HelpBox("Your party is full!", MessageType.Error, true);
+        }
+
+        if (GUILayout.Button("Clear Party"))
+        {
+            party = new List<PartyMember>();
+            partyIndex = 0;
+        }
 
         switch (characterClass)
         {
@@ -72,6 +136,14 @@ public class CharacterWindow : EditorWindow
                 break;
             default:
                 break;
+        }
+    }
+
+    public void PopulateParty()
+    {
+        for (int i = 0; i < party.Count; i++)
+        {
+
         }
     }
 

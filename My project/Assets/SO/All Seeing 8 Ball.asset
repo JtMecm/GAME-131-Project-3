@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a06532df541a24ab2da35fc542a6d8, type: 3}
+  m_Name: All Seeing 8 Ball
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  prefab: {fileID: 3008044168934492359, guid: 726008de9f9a1a34dbb3f08bec23a786, type: 3}
+  itemType: 2
